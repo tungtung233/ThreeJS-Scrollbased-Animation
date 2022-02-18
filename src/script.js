@@ -11,7 +11,11 @@ const parameters = {
   materialColor: '#ffeded',
 };
 
-gui.addColor(parameters, 'materialColor');
+gui
+  .addColor(parameters, 'materialColor')
+  .onChange(() => {
+  material.color.set(parameters.materialColor);
+  });
 
 /**
  * Base
@@ -46,7 +50,7 @@ scene.add(mesh1, mesh2, mesh3);
  */
 const directionalLight = new THREE.DirectionalLight('#ffffff', 1);
 directionalLight.position.set(1, 1, 0);
-scene.add(directionalLight)
+scene.add(directionalLight);
 
 /**
  * Sizes
