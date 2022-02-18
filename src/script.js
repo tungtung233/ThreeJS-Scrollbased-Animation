@@ -30,8 +30,17 @@ const scene = new THREE.Scene();
  * Objects
  */
 
+// Textures
+const textureLoader = new THREE.TextureLoader();
+// by default, the MeshToonMaterial only loads two colors - dark and light, so we are providing a texture with 3 tones
+const gradientTexture = textureLoader.load('textures/gradients/3.jpg')
+// WebGL will automatically try to interpolate between the three pixels from 3.jpg, this will stop that
+gradientTexture.magFilter = THREE.NearestFilter;
+
+// Material
 const material = new THREE.MeshToonMaterial({
   color: parameters.materialColor,
+  gradientMap: gradientTexture,
 });
 
 const mesh1 = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 60), material);
