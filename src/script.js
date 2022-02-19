@@ -53,6 +53,10 @@ const mesh3 = new THREE.Mesh(
   material
 );
 
+mesh1.position.x = 2;
+mesh2.position.x = -2;
+mesh3.position.x = 2;
+
 mesh1.position.y = -objectsDistance * 0;
 mesh2.position.y = -objectsDistance * 1;
 mesh3.position.y = -objectsDistance * 2;
@@ -129,7 +133,7 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Animate camera
-  camera.position.y = - scrollY / sizes.height * objectsDistance;
+  camera.position.y = (-scrollY / sizes.height) * objectsDistance;
 
   // Animate meshes
   for (const mesh of sectionMeshes) {
