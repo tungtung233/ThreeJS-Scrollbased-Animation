@@ -171,7 +171,8 @@ window.addEventListener('scroll', () => {
         duration: 1.5,
         ease: 'power2.inOut',
         x: '+=3', // will add to the objects' current x rotation
-        y: '+=3'
+        y: '+=3',
+        z: '+=1.5'
       }
     )
   }
