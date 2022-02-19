@@ -1,4 +1,5 @@
-# Three.js Journey
+# Scrollbased Animation - Three.js Journey
+This project was completed with the goal of understanding how to incorporate scrollbased animation.
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
