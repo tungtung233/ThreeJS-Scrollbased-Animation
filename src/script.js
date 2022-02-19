@@ -206,8 +206,8 @@ const tick = () => {
   // Mouse position affects group position
   const parallaxX = cursor.x;
   const parallaxY = -cursor.y;
-  cameraGroup.position.x = (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
-  cameraGroup.position.y = (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
+  cameraGroup.position.x = (parallaxX - cameraGroup.position.x) * deltaTime;
+  cameraGroup.position.y = (parallaxY - cameraGroup.position.y) * deltaTime;
 
   // Animate meshes
   for (const mesh of sectionMeshes) {
