@@ -99,7 +99,7 @@ window.addEventListener('resize', () => {
  */
 // Group
 const cameraGroup = new THREE.Group();
-scene.add(cameraGroup)
+scene.add(cameraGroup);
 
 // Base camera
 const camera = new THREE.PerspectiveCamera(
@@ -142,19 +142,22 @@ window.addEventListener('mousemove', (event) => {
  * Animate
  */
 const clock = new THREE.Clock();
+let previousTime = 0;
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+  const deltaTime = elapsedTime - previousTime; //getting the time passed since the last tick call
+  previousTime = elapsedTime;
 
   // Animate camera
   // Camera moves inside of the group - so scroll affects camera position
   camera.position.y = (-scrollY / sizes.height) * objectsDistance;
 
   // Mouse position affects group position
-  const parallaxX = cursor.x;
-  const parallaxY = -cursor.y;
-  cameraGroup.position.x = parallaxX;
-  cameraGroup.position.y = parallaxY;
+  const parallaxX = cursor.x * 0.5;
+  const parallaxY = -cursor.y * 0.5;
+  cameraGroup.position.x = (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
+  cameraGroup.position.y = (parallaxY - cameraGroup.position.y) * 5 * deltaTime;
 
   // Animate meshes
   for (const mesh of sectionMeshes) {
