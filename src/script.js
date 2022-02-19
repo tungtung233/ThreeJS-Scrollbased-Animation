@@ -97,6 +97,10 @@ window.addEventListener('resize', () => {
 /**
  * Camera
  */
+// Group
+const cameraGroup = new THREE.Group();
+scene.add(cameraGroup)
+
 // Base camera
 const camera = new THREE.PerspectiveCamera(
   35,
@@ -105,7 +109,7 @@ const camera = new THREE.PerspectiveCamera(
   100
 );
 camera.position.z = 6;
-scene.add(camera);
+cameraGroup.add(camera);
 
 /**
  * Renderer
@@ -143,12 +147,14 @@ const tick = () => {
   const elapsedTime = clock.getElapsedTime();
 
   // Animate camera
+  // Camera moves inside of the group - so scroll affects camera position
   camera.position.y = (-scrollY / sizes.height) * objectsDistance;
 
+  // Mouse position affects group position
   const parallaxX = cursor.x;
   const parallaxY = -cursor.y;
-  camera.position.x = parallaxX;
-  camera.position.y = parallaxY;
+  cameraGroup.position.x = parallaxX;
+  cameraGroup.position.y = parallaxY;
 
   // Animate meshes
   for (const mesh of sectionMeshes) {
