@@ -11,11 +11,9 @@ const parameters = {
   materialColor: '#ffeded',
 };
 
-gui
-  .addColor(parameters, 'materialColor')
-  .onChange(() => {
+gui.addColor(parameters, 'materialColor').onChange(() => {
   material.color.set(parameters.materialColor);
-  });
+});
 
 /**
  * Base
@@ -33,7 +31,7 @@ const scene = new THREE.Scene();
 // Textures
 const textureLoader = new THREE.TextureLoader();
 // by default, the MeshToonMaterial only loads two colors - dark and light, so we are providing a texture with 3 tones
-const gradientTexture = textureLoader.load('textures/gradients/3.jpg')
+const gradientTexture = textureLoader.load('textures/gradients/3.jpg');
 // WebGL will automatically try to interpolate between the three pixels from 3.jpg, this will stop that
 gradientTexture.magFilter = THREE.NearestFilter;
 
@@ -60,6 +58,8 @@ mesh2.position.y = -objectsDistance * 1;
 mesh3.position.y = -objectsDistance * 2;
 
 scene.add(mesh1, mesh2, mesh3);
+
+const sectionMeshes = [ mesh1, mesh2, mesh3 ];
 
 /**
  * Lights
@@ -120,6 +120,12 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  // Animate meshes
+  for (const mesh of sectionMeshes) {
+    mesh.rotation.x = elapsedTime * 0.2;
+    mesh.rotation.y = elapsedTime * 0.2;
+  }
 
   // Render
   renderer.render(scene, camera);
